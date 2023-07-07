@@ -9,6 +9,7 @@ public class Player : KinematicBody
     [Export]
     public float speed;
     public int health;
+    bool finish;
     Vector3 moveVector;
     Sprite3D sprite;
     AnimationPlayer animPlayer;
@@ -21,7 +22,8 @@ public class Player : KinematicBody
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         particles = GetNode<Particles>("Particles");
         particlesTimer = GetNode<Timer>("ParticlesTimer");
-        health = 10;
+        health = 15;
+        finish = false;
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,9 +67,12 @@ public class Player : KinematicBody
     public void damage(int amount)
     {
         health -= amount;
+        sprite.Modulate -= new Color(0.0f, 0.2f, 0.2f, 0.0f);
         particles.Emitting = true;
         particlesTimer.Start();
-        if(health < 0)
+        if(finish && health < 0)
+            GetTree().ChangeScene("res://scripts/Level1.tscn");
+        else if(health < 0)
             GetTree().ReloadCurrentScene();
     }
 
@@ -75,5 +80,14 @@ public class Player : KinematicBody
     {
         particles.Emitting = false;
     }
+
+    public void _on_Finish_body_entered(Node body)
+    {
+        finish = true;
+    }
     
+    public void _on_Finish_body_exited(Node body)
+    {
+        finish = false;
+    }
 }

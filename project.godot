@@ -14,6 +14,16 @@ config/name="Gmtk 2023"
 run/main_scene="res://scripts/World.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=640
+window/size/height=482
+window/size/fullscreen=true
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
