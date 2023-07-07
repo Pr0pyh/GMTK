@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/andrej/Desktop/GodotProjekti/GMTK/Gmtk 2023.csproj": {}
+  },
+  "projects": {
+    "/home/andrej/Desktop/GodotProjekti/GMTK/Gmtk 2023.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/andrej/Desktop/GodotProjekti/GMTK/Gmtk 2023.csproj",
+        "projectName": "Gmtk 2023",
+        "projectPath": "/home/andrej/Desktop/GodotProjekti/GMTK/Gmtk 2023.csproj",
+        "packagesPath": "/home/andrej/.nuget/packages/",
+        "outputPath": "/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/andrej/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

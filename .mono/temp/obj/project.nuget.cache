@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "0KdlA0wB6zJ7y+daIr+SJIDGWIHQp1+G7U8RE3w/UBuEPDOVwMD7mkve181Q9M4o+oZEV5Msj35AGS81wp3ZuA==",
+  "success": true,
+  "projectFilePath": "/home/andrej/Desktop/GodotProjekti/GMTK/Gmtk 2023.csproj",
+  "expectedPackageFiles": [
+    "/home/andrej/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/andrej/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
