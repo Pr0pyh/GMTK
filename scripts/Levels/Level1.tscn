@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Levels/Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Statics/Texts/Text.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/mouse1text.png" type="Texture" id=3]
+[ext_resource path="res://assets/mirrortext.png" type="Texture" id=4]
+
+[node name="Level1" instance=ExtResource( 1 )]
+
+[node name="Player" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5444, 2.50116, 0 )
+level = "res://scripts/Levels/Level2.tscn"
+
+[node name="Camera" parent="Player" index="9"]
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7, 8 )
+
+[node name="Finish" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9157, 3.87216, 0 )
+
+[node name="GridMap" parent="." index="3"]
+data = {
+"cells": PoolIntArray( 11, 0, 0, 65524, 0, 0, 131083, 0, 0, 196596, 0, 0, 11, 1, 0, 65524, 1, 0, 131083, 1, 0, 196596, 1, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 65524, 2, 0, 196596, 2, 0, 9, 3, 0, 65524, 3, 0, 196596, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 65524, 4, 0, 65525, 4, 0, 65526, 4, 0, 65527, 4, 0, 65528, 4, 0, 65529, 4, 0, 65530, 4, 0, 65531, 4, 0, 65532, 4, 0, 65533, 4, 0, 65534, 4, 0, 65535, 4, 0, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 4, 65533, 0, 5, 65533, 0, 6, 65533, 0, 7, 65533, 0, 8, 65533, 0, 9, 65533, 0, 65524, 65533, 0, 65525, 65533, 0, 65526, 65533, 0, 65527, 65533, 0, 65528, 65533, 0, 65529, 65533, 0, 65530, 65533, 0, 65531, 65533, 0, 65532, 65533, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 131072, 65533, 0, 131073, 65533, 0, 131074, 65533, 0, 131075, 65533, 0, 131076, 65533, 0, 131077, 65533, 0, 131078, 65533, 0, 131079, 65533, 0, 131080, 65533, 0, 131081, 65533, 0, 196596, 65533, 0, 196597, 65533, 0, 196598, 65533, 0, 196599, 65533, 0, 196600, 65533, 0, 196601, 65533, 0, 196602, 65533, 0, 196603, 65533, 0, 196604, 65533, 0, 196605, 65533, 0, 196606, 65533, 0, 196607, 65533, 0, 9, 65534, 0, 10, 65534, 0, 11, 65534, 0, 65524, 65534, 0, 131081, 65534, 0, 131082, 65534, 0, 131083, 65534, 0, 196596, 65534, 0, 11, 65535, 0, 65524, 65535, 0, 131083, 65535, 0, 196596, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 2, 0 )
+}
+
+[node name="Text" parent="." index="4" instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -12.6884, 2.61102, -3.94363 )
+
+[node name="Text2" parent="." index="5" instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2.64767, -3.53111 )
+
+[node name="Sprite3D" parent="Text2" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Text3" parent="." index="6" instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 10.5767, 2.46241, -3.7374 )
+
+[node name="Sprite3D" parent="Text3" index="0"]
+texture = ExtResource( 4 )
+
+[editable path="Text2"]
+[editable path="Text3"]

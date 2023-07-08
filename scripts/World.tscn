@@ -1,20 +1,30 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/CameraMovement.cs" type="Script" id=2]
 [ext_resource path="res://scripts/Statics/Finish/Finish.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Statics/GridMap/GridMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Enemy/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.6, 0.619608, 0.698039, 1 )
 
 [sub_resource type="CubeMesh" id=1]
+material = SubResource( 3 )
 size = Vector3( 50, 2, 50 )
+
+[sub_resource type="PanoramaSky" id=4]
+panorama = ExtResource( 6 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
+background_sky = SubResource( 4 )
 background_color = Color( 0.972549, 0.968627, 0.635294, 1 )
-ambient_light_color = Color( 0.654902, 0.94902, 0.780392, 1 )
+ambient_light_color = Color( 0.94902, 0.847059, 0.847059, 1 )
+ambient_light_sky_contribution = 0.0
 fog_enabled = true
-fog_color = Color( 0.458824, 0.741176, 0.45098, 1 )
+fog_color = Color( 0.705882, 0.772549, 0.705882, 1 )
 fog_sun_color = Color( 0.690196, 0.568627, 0.32549, 1 )
 fog_depth_begin = 1.0
 fog_depth_end = 80.0
@@ -49,8 +59,22 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624, -10.5728 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22687, -10.5728 )
 speed = 2.0
+
+[node name="Lights" type="Spatial" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0687, 5.86818, -14.8121 )
+light_color = Color( 0.678431, 0.745098, 0.776471, 1 )
+light_energy = 10.0
+omni_range = 10.0
+
+[node name="OmniLight2" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5561, 5.86818, -14.8121 )
+light_color = Color( 0.678431, 0.745098, 0.776471, 1 )
+light_energy = 10.0
+omni_range = 10.0
 
 [connection signal="body_entered" from="Finish" to="Player" method="_on_Finish_body_entered"]
 [connection signal="body_exited" from="Finish" to="Player" method="_on_Finish_body_exited"]

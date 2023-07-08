@@ -19,6 +19,7 @@ public class Enemy : KinematicBody
     Area hurtArea;
     Timer stunTimer;
     Timer hurtTimer;
+    AnimationPlayer animPlayer;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -26,6 +27,7 @@ public class Enemy : KinematicBody
         stunTimer = GetNode<Timer>("StunTimer");
         hurtTimer = GetNode<Timer>("HurtTimer");
         hurtArea = GetNode<Area>("Area");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         player = GetParent().GetNode<Player>("Player");
     }
 
@@ -51,14 +53,20 @@ public class Enemy : KinematicBody
 
     public void moving()
     {
-        LookAt(player.Translation, new Vector3(0.0f, 1.0f, 0.0f));
+        if(!animPlayer.IsPlaying())
+            animPlayer.Play("run");
+        // LookAt(player.Translation, new Vector3(0.0f, 1.0f, 0.0f));
+        player.Rotation = new Vector3(player.Rotation.x, 0.0f, 0.0f);
         Vector3 movePos = (player.Translation - Translation).Normalized();
         MoveAndSlide(movePos * speed);
     }
 
     public void stun()
     {
-        LookAt(player.Translation, new Vector3(0.0f, 1.0f, 0.0f));
+        if(animPlayer.IsPlaying())
+            animPlayer.Stop();
+        // LookAt(player.Translation, new Vector3(0.0f, 1.0f, 0.0f));
+        player.Rotation = new Vector3(player.Rotation.x, 0.0f, 0.0f);
         Vector3 movePos = -(player.Translation - Translation).Normalized();
         MoveAndSlide(movePos * speed * 8);
     }

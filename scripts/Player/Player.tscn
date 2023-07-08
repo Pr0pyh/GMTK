@@ -122,6 +122,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.458824, 0.992157, 0.0156863, 1 )
 
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.992157, 1, 0, 0.282353 )
+
 [connection signal="timeout" from="ParticlesTimer2" to="." method="_on_ParticlesTimer2_timeout"]
 [connection signal="timeout" from="ParticlesTimer" to="." method="_on_ParticlesTimer_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

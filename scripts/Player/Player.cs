@@ -8,6 +8,8 @@ public class Player : KinematicBody
     // private string b = "text";
     [Export]
     public float speed;
+    [Export]
+    public String level;
     public int health;
     bool finish;
     Vector3 moveVector;
@@ -20,6 +22,7 @@ public class Player : KinematicBody
     CameraMovement camera;
     ColorRect colorRect;
     ColorRect colorRect2;
+    ColorRect colorRect3;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -32,11 +35,13 @@ public class Player : KinematicBody
         camera = GetNode<CameraMovement>("Camera");
         colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect");
         colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect2");
+        colorRect3 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect3");
+        finish = false;
         colorRect.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
         colorRect2.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorRect3.Visible = false;
         attackBox.Monitoring = false;
         health = 15;
-        finish = false;
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,7 +69,10 @@ public class Player : KinematicBody
             sprite.FlipH = false; 
         
         if(moveVector != new Vector3(0.0f, 0.0f, 0.0f))
+        {
+            camera.trauma = 0.02f;
             animPlayer.Play("run_left");
+        }
         else if(animPlayer.IsPlaying())
         {
             animPlayer.Stop();
@@ -73,6 +81,11 @@ public class Player : KinematicBody
 
         if(Input.IsActionJustPressed("ui_accept"))
             damage(5);
+
+        if(finish && (sprite.Modulate.a > 0.6f))
+            colorRect3.Visible = true;
+        else
+            colorRect3.Visible = false;
 
         MoveAndSlide(moveVector * speed);
     }
@@ -87,7 +100,7 @@ public class Player : KinematicBody
         colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
         particlesTimer.Start();
         if(finish && health < 0 && sprite.Modulate.a > 0.6f)
-            GetTree().ChangeScene("res://scripts/Level1.tscn");
+            GetTree().ChangeScene(level);
         else if(health < 0)
             GetTree().ReloadCurrentScene();
     }
@@ -125,12 +138,14 @@ public class Player : KinematicBody
 
     public void _on_Finish_body_entered(Node body)
     {
-        finish = true;
+        if(body.Name == "Player")
+            finish = true;
     }
     
     public void _on_Finish_body_exited(Node body)
     {
-        finish = false;
+        if(body.Name == "Player")
+            finish = false;
     }
 
     public void _on_Area_body_entered(Node body)
@@ -138,8 +153,8 @@ public class Player : KinematicBody
         if(body.IsInGroup("enemies") && finish == false)
         {
             Enemy enemy = (Enemy)body;
-            if(sprite.Modulate.a < 1.0f)
-                sprite.Modulate += new Color(0.0f, 0.0f, 0.0f, 0.3f);
+            // if(sprite.Modulate.a < 1.0f)
+            //     sprite.Modulate += new Color(0.0f, 0.0f, 0.0f, 0.3f);
             enemy.hurt();
         }
     }
