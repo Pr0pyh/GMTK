@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/CameraMovement.cs" type="Script" id=2]
 [ext_resource path="res://scripts/Statics/Finish/Finish.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Statics/GridMap/GridMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Enemy/Enemy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 50, 2, 50 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_color = Color( 0.972549, 0.968627, 0.635294, 1 )
+ambient_light_color = Color( 0.654902, 0.94902, 0.780392, 1 )
+fog_enabled = true
+fog_color = Color( 0.458824, 0.741176, 0.45098, 1 )
+fog_sun_color = Color( 0.690196, 0.568627, 0.32549, 1 )
+fog_depth_begin = 1.0
+fog_depth_end = 80.0
 
 [node name="World" type="Spatial"]
 
@@ -15,10 +26,13 @@ mesh = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50116, 0 )
+axis_lock_motion_y = true
+move_lock_y = true
 speed = 10.0
 
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7, 8 )
+environment = SubResource( 2 )
 fov = 77.5665
 script = ExtResource( 2 )
 
@@ -33,6 +47,10 @@ __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 3, 0 )
 }
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624, -10.5728 )
+speed = 2.0
 
 [connection signal="body_entered" from="Finish" to="Player" method="_on_Finish_body_entered"]
 [connection signal="body_exited" from="Finish" to="Player" method="_on_Finish_body_exited"]

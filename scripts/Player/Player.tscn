@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://assets/player1.png" type="Texture" id=2]
@@ -22,6 +22,24 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 0 ]
 }
 
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+direction = Vector3( 1, 1, 0 )
+gravity = Vector3( 0, 0, 0 )
+radial_accel = 10.0
+color = Color( 0.313726, 1, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.529412, 1, 0, 1 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 8 )
+size = Vector3( 0.5, 0.5, 0.5 )
+
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 5
 emission_ring_radius = 2.0
@@ -40,6 +58,9 @@ albedo_color = Color( 1, 0, 0, 1 )
 material = SubResource( 4 )
 size = Vector3( 0.5, 0.5, 0.5 )
 
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 4, 4, 4 )
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
@@ -56,6 +77,18 @@ frame = 1
 reset_on_save = false
 anims/run_left = SubResource( 2 )
 
+[node name="Particles2" type="Particles" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 9 )
+
+[node name="ParticlesTimer2" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [node name="Particles" type="Particles" parent="."]
 emitting = false
 amount = 10
@@ -66,5 +99,29 @@ draw_pass_1 = SubResource( 5 )
 
 [node name="ParticlesTimer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
 
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.603922, 0.133333, 0.133333, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.458824, 0.992157, 0.0156863, 1 )
+
+[connection signal="timeout" from="ParticlesTimer2" to="." method="_on_ParticlesTimer2_timeout"]
 [connection signal="timeout" from="ParticlesTimer" to="." method="_on_ParticlesTimer_timeout"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

@@ -15,6 +15,11 @@ public class Player : KinematicBody
     AnimationPlayer animPlayer;
     Particles particles;
     Timer particlesTimer;
+    Timer particlesTimer2;
+    Area attackBox;
+    CameraMovement camera;
+    ColorRect colorRect;
+    ColorRect colorRect2;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -22,6 +27,14 @@ public class Player : KinematicBody
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         particles = GetNode<Particles>("Particles");
         particlesTimer = GetNode<Timer>("ParticlesTimer");
+        particlesTimer2 = GetNode<Timer>("ParticlesTimer2");
+        attackBox = GetNode<Area>("Area");
+        camera = GetNode<CameraMovement>("Camera");
+        colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect");
+        colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect2");
+        colorRect.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorRect2.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        attackBox.Monitoring = false;
         health = 15;
         finish = false;
     }
@@ -69,16 +82,45 @@ public class Player : KinematicBody
         health -= amount;
         sprite.Modulate -= new Color(0.0f, 0.2f, 0.2f, 0.0f);
         particles.Emitting = true;
+        attackBox.Monitoring = true;
+        camera.trauma = 0.3f;
+        colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
         particlesTimer.Start();
-        if(finish && health < 0)
+        if(finish && health < 0 && sprite.Modulate.a > 0.6f)
             GetTree().ChangeScene("res://scripts/Level1.tscn");
         else if(health < 0)
             GetTree().ReloadCurrentScene();
     }
 
+    public void heal(int amount)
+    {
+        if(health < 45)
+        {
+            health += amount;
+            if(sprite.Modulate < new Color(1.0f, 1.0f, 1.0f, 1.0f))
+                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, 0.0f);   
+            else
+            {
+                if(sprite.Modulate.a > 0.1f)
+                    sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.3f);
+            }
+            colorRect2.Color += new Color(0.0f, 0.0f, 0.0f, 0.6f);
+            particlesTimer2.Start();
+        }
+    }
+
     public void _on_ParticlesTimer_timeout()
     {
         particles.Emitting = false;
+        attackBox.Monitoring = false;
+        GD.Print("prolazak");
+        colorRect.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+    }
+
+    public void _on_ParticlesTimer2_timeout()
+    {
+        GD.Print("hilovanje");
+        colorRect2.Color -= new Color(0.0f, 0.0f, 0.0f, 0.6f);
     }
 
     public void _on_Finish_body_entered(Node body)
@@ -89,5 +131,16 @@ public class Player : KinematicBody
     public void _on_Finish_body_exited(Node body)
     {
         finish = false;
+    }
+
+    public void _on_Area_body_entered(Node body)
+    {
+        if(body.IsInGroup("enemies") && finish == false)
+        {
+            Enemy enemy = (Enemy)body;
+            if(sprite.Modulate.a < 1.0f)
+                sprite.Modulate += new Color(0.0f, 0.0f, 0.0f, 0.3f);
+            enemy.hurt();
+        }
     }
 }
