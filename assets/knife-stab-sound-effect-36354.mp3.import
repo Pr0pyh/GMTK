@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/knife-stab-sound-effect-36354.mp3-662f5d660613475a31aa72015606b939.mp3str"
+
+[deps]
+
+source_file="res://assets/knife-stab-sound-effect-36354.mp3"
+dest_files=[ "res://.import/knife-stab-sound-effect-36354.mp3-662f5d660613475a31aa72015606b939.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

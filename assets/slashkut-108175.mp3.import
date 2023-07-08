@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slashkut-108175.mp3-0a6459d8043ec6f16b0e2cbebd0e7ab4.mp3str"
+
+[deps]
+
+source_file="res://assets/slashkut-108175.mp3"
+dest_files=[ "res://.import/slashkut-108175.mp3-0a6459d8043ec6f16b0e2cbebd0e7ab4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

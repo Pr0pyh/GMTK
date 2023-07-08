@@ -40,7 +40,7 @@ mesh = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50116, 0 )
 axis_lock_motion_y = true
 move_lock_y = true
-speed = 10.0
+speed = 7.0
 
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7, 8 )

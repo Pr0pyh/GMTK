@@ -21,6 +21,7 @@ public class Enemy : KinematicBody
     Timer stunTimer;
     Timer hurtTimer;
     AnimationPlayer animPlayer;
+    AudioStreamPlayer audioPlayer;
     RayCast rayCast;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -30,6 +31,7 @@ public class Enemy : KinematicBody
         hurtTimer = GetNode<Timer>("HurtTimer");
         hurtArea = GetNode<Area>("Area");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         player = GetParent().GetNode<Player>("Player");
         rayCast = GetNode<RayCast>("RayCast");
 
@@ -95,6 +97,7 @@ public class Enemy : KinematicBody
             hurtArea.SetDeferred("monitoring", false);
             hurtTimer.Start();
             Player player = (Player)body;
+            audioPlayer.Play();
             player.heal(5);
         }
     }

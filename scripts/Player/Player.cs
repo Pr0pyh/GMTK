@@ -24,12 +24,16 @@ public class Player : KinematicBody
     ColorRect colorRect;
     ColorRect colorRect2;
     ColorRect colorRect3;
+    AudioStreamPlayer audioPlayer;
+    AudioStreamPlayer stepPlayer;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         sprite = GetNode<Sprite3D>("Sprite3D");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         knifePlayer = GetNode<AnimationPlayer>("AnimationPlayer2");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        stepPlayer = GetNode<AudioStreamPlayer>("WalkingAudio");
         particles = GetNode<Particles>("Particles");
         particlesTimer = GetNode<Timer>("ParticlesTimer");
         particlesTimer2 = GetNode<Timer>("ParticlesTimer2");
@@ -74,10 +78,14 @@ public class Player : KinematicBody
         {
             camera.trauma = 0.02f;
             animPlayer.Play("run_left");
+            if(stepPlayer.Playing == false)
+                stepPlayer.Play();
         }
         else if(animPlayer.IsPlaying())
         {
             animPlayer.Stop();
+            if(stepPlayer.Playing == true)
+                stepPlayer.Stop();
             sprite.Frame = 0;
         }
 
@@ -99,6 +107,7 @@ public class Player : KinematicBody
         particles.Emitting = true;
         attackBox.Monitoring = true;
         knifePlayer.Play("stab");
+        audioPlayer.Play();
         camera.trauma = 0.3f;
         colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
         particlesTimer.Start();

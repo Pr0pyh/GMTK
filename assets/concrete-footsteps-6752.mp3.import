@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/concrete-footsteps-6752.mp3-bdf60808533830c6b729b56d18cc07da.mp3str"
+
+[deps]
+
+source_file="res://assets/concrete-footsteps-6752.mp3"
+dest_files=[ "res://.import/concrete-footsteps-6752.mp3-bdf60808533830c6b729b56d18cc07da.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
