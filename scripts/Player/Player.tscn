@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Player/Player.cs" type="Script" id=1]
-[ext_resource path="res://assets/player1.png" type="Texture" id=2]
+[ext_resource path="res://assets/player2.png" type="Texture" id=2]
+[ext_resource path="res://assets/88d47b05e54d092.png" type="Texture" id=3]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -60,6 +61,34 @@ size = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 4, 4, 4 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "stab"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Knife:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.20838, 0, 0 ), Vector3( 1.20838, 0, 0 ), Vector3( 0.470136, 0, 0 ), Vector3( 0.764073, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Knife:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 94.682 ), Vector3( 0, 0, 94.682 ), Vector3( 0, 0, -29.532 ) ]
+}
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -127,6 +156,14 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.992157, 1, 0, 0.282353 )
+
+[node name="Knife" type="Sprite3D" parent="."]
+transform = Transform( 0.0870081, 0.0492909, 0, -0.0492909, 0.0870081, 0, 0, 0, 1, 1.20838, 0, 0 )
+flip_h = true
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/stab = SubResource( 10 )
 
 [connection signal="timeout" from="ParticlesTimer2" to="." method="_on_ParticlesTimer2_timeout"]
 [connection signal="timeout" from="ParticlesTimer" to="." method="_on_ParticlesTimer_timeout"]

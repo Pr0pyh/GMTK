@@ -15,6 +15,7 @@ public class Player : KinematicBody
     Vector3 moveVector;
     Sprite3D sprite;
     AnimationPlayer animPlayer;
+    AnimationPlayer knifePlayer;
     Particles particles;
     Timer particlesTimer;
     Timer particlesTimer2;
@@ -28,6 +29,7 @@ public class Player : KinematicBody
     {
         sprite = GetNode<Sprite3D>("Sprite3D");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        knifePlayer = GetNode<AnimationPlayer>("AnimationPlayer2");
         particles = GetNode<Particles>("Particles");
         particlesTimer = GetNode<Timer>("ParticlesTimer");
         particlesTimer2 = GetNode<Timer>("ParticlesTimer2");
@@ -96,6 +98,7 @@ public class Player : KinematicBody
         sprite.Modulate -= new Color(0.0f, 0.2f, 0.2f, 0.0f);
         particles.Emitting = true;
         attackBox.Monitoring = true;
+        knifePlayer.Play("stab");
         camera.trauma = 0.3f;
         colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
         particlesTimer.Start();

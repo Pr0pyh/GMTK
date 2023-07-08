@@ -28,7 +28,7 @@ public class CameraMovement : Camera
     public override void _PhysicsProcess(float delta)
     {
         GlobalTranslation = GlobalTranslation.LinearInterpolate(player.GlobalTranslation, 0.9f);
-        Translation += new Vector3(0.0f, 7.0f, 8.0f);
+        Translation += new Vector3(0.0f, 5.0f, 6.0f);
         if(!(trauma < 0.0))
         {
             shake();

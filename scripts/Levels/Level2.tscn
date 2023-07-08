@@ -10,7 +10,7 @@
 
 [node name="Player" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9431, 2.50116, 5.07659 )
-level = "res://scripts/Levels/Level.tscn"
+level = "res://scripts/Levels/Level3.tscn"
 
 [node name="Finish" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5393, 1.8386, -4.55143 )

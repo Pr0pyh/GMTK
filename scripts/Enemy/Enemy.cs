@@ -8,6 +8,7 @@ public class Enemy : KinematicBody
     // private string b = "text";
     [Export]
     public float speed;
+    Vector3 movePos;
 
     public enum ENEMY_STATE {
         MOVING,
@@ -20,6 +21,7 @@ public class Enemy : KinematicBody
     Timer stunTimer;
     Timer hurtTimer;
     AnimationPlayer animPlayer;
+    RayCast rayCast;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -29,6 +31,9 @@ public class Enemy : KinematicBody
         hurtArea = GetNode<Area>("Area");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         player = GetParent().GetNode<Player>("Player");
+        rayCast = GetNode<RayCast>("RayCast");
+
+        movePos = (player.Translation - Translation).Normalized();
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,8 +61,9 @@ public class Enemy : KinematicBody
         if(!animPlayer.IsPlaying())
             animPlayer.Play("run");
         // LookAt(player.Translation, new Vector3(0.0f, 1.0f, 0.0f));
+        Vector3 currPos = (player.Translation - Translation).Normalized();
         player.Rotation = new Vector3(player.Rotation.x, 0.0f, 0.0f);
-        Vector3 movePos = (player.Translation - Translation).Normalized();
+        movePos = currPos;
         MoveAndSlide(movePos * speed);
     }
 
