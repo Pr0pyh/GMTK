@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/electric-hum-141075.mp3-d20d2c0caf6d090501a85dec19491a19.mp3str"
+
+[deps]
+
+source_file="res://assets/electric-hum-141075.mp3"
+dest_files=[ "res://.import/electric-hum-141075.mp3-d20d2c0caf6d090501a85dec19491a19.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
