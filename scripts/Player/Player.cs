@@ -11,6 +11,7 @@ public class Player : KinematicBody
     [Export]
     public String level;
     public int health;
+    public int inv;
     bool finish;
     Vector3 moveVector;
     Sprite3D sprite;
@@ -28,6 +29,7 @@ public class Player : KinematicBody
     AudioStreamPlayer stepPlayer;
     [Export]
     public bool canHurt;
+    Label label;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -44,12 +46,15 @@ public class Player : KinematicBody
         colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect");
         colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect2");
         colorRect3 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect3");
+        label = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<Label>("Label");
         finish = false;
         colorRect.Visible = false;
         colorRect2.Visible = false;
         colorRect3.Visible = false;
+        label.Visible = false;
         attackBox.Monitoring = false;
         health = 15;
+        inv = 10;
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,6 +85,7 @@ public class Player : KinematicBody
         {
             camera.trauma = 0.02f;
             animPlayer.Play("run_left");
+            label.Visible = false;
             if(stepPlayer.Playing == false)
                 stepPlayer.Play();
         }
@@ -92,9 +98,21 @@ public class Player : KinematicBody
         }
 
         if(Input.IsActionJustPressed("ui_accept") && canHurt)
+        {
             damage(5);
+        }
 
-        if(finish && (sprite.Modulate.a > 0.2f))
+        if(Input.IsActionJustPressed("ui_cancel"))
+        {
+            label.Visible = true;
+        }
+
+        if(Input.IsActionJustPressed("ui_accept") && label.Visible == true)
+        {
+            GetTree().Quit();
+        }
+
+        if(finish && inv >= 1)
             colorRect3.Visible = true;
         else
             colorRect3.Visible = false;
@@ -113,7 +131,7 @@ public class Player : KinematicBody
         camera.trauma = 0.3f;
         colorRect.Visible = true;
         particlesTimer.Start();
-        if(finish && health < 0 && sprite.Modulate.a > 0.2f)
+        if(finish && health < 0 && inv >= 1)
             GetTree().ChangeScene(level);
         else if(health < 0)
             GetTree().ReloadCurrentScene();
@@ -121,19 +139,25 @@ public class Player : KinematicBody
 
     public void heal(int amount)
     {
-        if(health < 45)
+        if(health < 15)
         {
             health += amount;
-            if(sprite.Modulate <= new Color(0.8f, 0.8f, 0.8f, 1.0f))
-                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, -0.0f);   
-            else
-            {
-                if(sprite.Modulate.a >= 0.0f)
-                    sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.5f);
-            }
-            colorRect2.Visible = true;
-            particlesTimer2.Start();
+            // if(sprite.Modulate < new Color(1.0f, 1.0f, 1.0f, 1.0f))
+                  
+            // else
+            // {
+            //     if(sprite.Modulate.a >= 0.0f)
+            //         sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.5f);
+            // }
+            sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, 0.0f); 
         }
+        else if(inv > 0)
+        {
+            inv -= amount;
+            sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.5f);
+        }
+        particlesTimer2.Start();
+        colorRect2.Visible = true;
     }
 
     public void _on_ParticlesTimer_timeout()

@@ -1,20 +1,59 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Default theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/Levels/MainMenu.cs" type="Script" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -36.5
-margin_top = -7.0
-margin_right = 36.5
-margin_bottom = 7.0
+margin_left = -377.0
+margin_top = -176.0
+margin_right = -225.0
+margin_bottom = -115.0
+rect_scale = Vector2( 5, 5 )
+theme = ExtResource( 1 )
 text = "HURT CLUB"
 align = 1
 valign = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -116.0
+margin_top = 48.0
+margin_bottom = 76.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+text = "START"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -116.0
+margin_top = 134.0
+margin_bottom = 162.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+text = "EXIT"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_Button2_pressed"]

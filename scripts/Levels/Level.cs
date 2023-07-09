@@ -21,7 +21,7 @@ public class Level : Spatial
         if(animName == "fadeIn" && final == true)
             animPlayer.Play("ending");
         else if(animName == "ending")
-            GetTree().Quit();
+            GetTree().ChangeScene("res://scripts/Levels/MainMenu.tscn");
 
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
