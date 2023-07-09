@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/doit.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Statics/Texts/Text.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/infront.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Statics/Lights/Light.tscn" type="PackedScene" id=6]
 
 [node name="Level2" instance=ExtResource( 1 )]
 
@@ -41,6 +42,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6784, 2.50116, -5.86434 )
 [node name="Sprite3D" parent="Text2" index="0"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1.57549, 0 )
 texture = ExtResource( 5 )
+
+[node name="OmniLight" parent="." index="7" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4161, 6.27632, 0 )
+
+[node name="OmniLight2" parent="." index="8" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.12401, 6.27632, 0 )
 
 [editable path="Text"]
 [editable path="Text2"]

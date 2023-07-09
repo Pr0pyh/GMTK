@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/children_singing-24524.mp3-7723d28d02778986d6fc55ea34641d5b.mp3str"
+
+[deps]
+
+source_file="res://assets/children_singing-24524.mp3"
+dest_files=[ "res://.import/children_singing-24524.mp3-7723d28d02778986d6fc55ea34641d5b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

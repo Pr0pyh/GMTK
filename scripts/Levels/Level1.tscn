@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Statics/Texts/Text.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/mouse1text.png" type="Texture" id=3]
 [ext_resource path="res://assets/mirrortext.png" type="Texture" id=4]
+[ext_resource path="res://scripts/Statics/Lights/Light.tscn" type="PackedScene" id=5]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -38,5 +39,20 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 10.5767, 2.46241, -3.7374 )
 [node name="Sprite3D" parent="Text3" index="0"]
 texture = ExtResource( 4 )
 
+[node name="OmniLight" parent="." index="7" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6705, 5.74411, 0 )
+
+[node name="AudioStreamPlayer3D" parent="OmniLight" index="0"]
+unit_db = 20.0
+autoplay = true
+bus = "Children"
+
+[node name="OmniLight2" parent="." index="8" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.477011, 5.74411, 0 )
+
+[node name="OmniLight3" parent="." index="9" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.916, 5.74411, 0 )
+
 [editable path="Text2"]
 [editable path="Text3"]
+[editable path="OmniLight"]

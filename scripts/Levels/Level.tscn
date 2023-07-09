@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/CameraMovement.cs" type="Script" id=1]
 [ext_resource path="res://scripts/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/Statics/Finish/Finish.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Statics/GridMap/GridMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/PixelTexture (152).png" type="Texture" id=6]
+[ext_resource path="res://scripts/Levels/Level.cs" type="Script" id=7]
 
 [sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0.94902, 0.847059, 0.847059, 1 )
@@ -31,7 +32,38 @@ fog_sun_color = Color( 0.690196, 0.568627, 0.32549, 1 )
 fog_depth_begin = 1.0
 fog_depth_end = 80.0
 
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
 [node name="Level" type="Spatial"]
+script = ExtResource( 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 5 )
@@ -60,5 +92,18 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+anims/RESET = SubResource( 8 )
+anims/fadeIn = SubResource( 9 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
 [connection signal="body_entered" from="Finish" to="Player" method="_on_Finish_body_entered"]
 [connection signal="body_exited" from="Finish" to="Player" method="_on_Finish_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
