@@ -109,6 +109,7 @@ tracks/1/keys = {
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
+canHurt = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

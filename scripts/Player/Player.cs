@@ -26,6 +26,8 @@ public class Player : KinematicBody
     ColorRect colorRect3;
     AudioStreamPlayer audioPlayer;
     AudioStreamPlayer stepPlayer;
+    [Export]
+    public bool canHurt;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -89,7 +91,7 @@ public class Player : KinematicBody
             sprite.Frame = 0;
         }
 
-        if(Input.IsActionJustPressed("ui_accept"))
+        if(Input.IsActionJustPressed("ui_accept") && canHurt)
             damage(5);
 
         if(finish && (sprite.Modulate.a > 0.7f))
