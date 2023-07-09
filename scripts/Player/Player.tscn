@@ -167,7 +167,7 @@ color = Color( 0.603922, 0.133333, 0.133333, 1 )
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.458824, 0.992157, 0.0156863, 1 )
+color = Color( 0.458824, 0.992157, 0.0156863, 0.658824 )
 
 [node name="ColorRect3" type="ColorRect" parent="CanvasLayer/Control"]
 visible = false

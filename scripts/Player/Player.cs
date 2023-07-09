@@ -45,8 +45,8 @@ public class Player : KinematicBody
         colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect2");
         colorRect3 = GetNode<CanvasLayer>("CanvasLayer").GetNode<Control>("Control").GetNode<ColorRect>("ColorRect3");
         finish = false;
-        colorRect.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        colorRect2.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorRect.Visible = false;
+        colorRect2.Visible = false;
         colorRect3.Visible = false;
         attackBox.Monitoring = false;
         health = 15;
@@ -94,7 +94,7 @@ public class Player : KinematicBody
         if(Input.IsActionJustPressed("ui_accept") && canHurt)
             damage(5);
 
-        if(finish && (sprite.Modulate.a > 0.7f))
+        if(finish && (sprite.Modulate.a > 0.2f))
             colorRect3.Visible = true;
         else
             colorRect3.Visible = false;
@@ -111,9 +111,9 @@ public class Player : KinematicBody
         knifePlayer.Play("stab");
         audioPlayer.Play();
         camera.trauma = 0.3f;
-        colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorRect.Visible = true;
         particlesTimer.Start();
-        if(finish && health < 0 && sprite.Modulate.a > 0.7f)
+        if(finish && health < 0 && sprite.Modulate.a > 0.2f)
             GetTree().ChangeScene(level);
         else if(health < 0)
             GetTree().ReloadCurrentScene();
@@ -124,14 +124,14 @@ public class Player : KinematicBody
         if(health < 45)
         {
             health += amount;
-            if(sprite.Modulate < new Color(1.0f, 1.0f, 1.0f, 1.0f))
-                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, -0.1f);   
+            if(sprite.Modulate <= new Color(0.8f, 0.8f, 0.8f, 1.0f))
+                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, -0.0f);   
             else
             {
-                if(sprite.Modulate.a > 0.1f)
-                    sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.3f);
+                if(sprite.Modulate.a >= 0.0f)
+                    sprite.Modulate -= new Color(0.0f, 0.0f, 0.0f, 0.5f);
             }
-            colorRect2.Color += new Color(0.0f, 0.0f, 0.0f, 0.6f);
+            colorRect2.Visible = true;
             particlesTimer2.Start();
         }
     }
@@ -141,13 +141,13 @@ public class Player : KinematicBody
         particles.Emitting = false;
         attackBox.Monitoring = false;
         GD.Print("prolazak");
-        colorRect.Color -= new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorRect.Visible = false;
     }
 
     public void _on_ParticlesTimer2_timeout()
     {
         GD.Print("hilovanje");
-        colorRect2.Color -= new Color(0.0f, 0.0f, 0.0f, 0.6f);
+        colorRect2.Visible = false;
     }
 
     public void _on_Finish_body_entered(Node body)
