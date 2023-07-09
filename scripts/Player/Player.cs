@@ -92,7 +92,7 @@ public class Player : KinematicBody
         if(Input.IsActionJustPressed("ui_accept"))
             damage(5);
 
-        if(finish && (sprite.Modulate.a > 0.6f))
+        if(finish && (sprite.Modulate.a > 0.7f))
             colorRect3.Visible = true;
         else
             colorRect3.Visible = false;
@@ -111,7 +111,7 @@ public class Player : KinematicBody
         camera.trauma = 0.3f;
         colorRect.Color += new Color(0.0f, 0.0f, 0.0f, 1.0f);
         particlesTimer.Start();
-        if(finish && health < 0 && sprite.Modulate.a > 0.6f)
+        if(finish && health < 0 && sprite.Modulate.a > 0.7f)
             GetTree().ChangeScene(level);
         else if(health < 0)
             GetTree().ReloadCurrentScene();
@@ -123,7 +123,7 @@ public class Player : KinematicBody
         {
             health += amount;
             if(sprite.Modulate < new Color(1.0f, 1.0f, 1.0f, 1.0f))
-                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, 0.0f);   
+                sprite.Modulate += new Color(0.0f, 0.2f, 0.2f, -0.1f);   
             else
             {
                 if(sprite.Modulate.a > 0.1f)

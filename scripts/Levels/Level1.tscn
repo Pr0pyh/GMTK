@@ -11,9 +11,6 @@
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5444, 2.50116, 0 )
 level = "res://scripts/Levels/Level2.tscn"
 
-[node name="Camera" parent="Player" index="13"]
-transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7, 8 )
-
 [node name="Finish" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9157, 3.87216, 0 )
 

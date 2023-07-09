@@ -12,7 +12,8 @@ public class Enemy : KinematicBody
 
     public enum ENEMY_STATE {
         MOVING,
-        STUN
+        STUN,
+        DETECTED
     };
     ENEMY_STATE enemyState;
     Node world;
@@ -53,12 +54,15 @@ public class Enemy : KinematicBody
             case ENEMY_STATE.STUN:
                 stun();
                 break;
+            case ENEMY_STATE.DETECTED:
+                detected();
+                break;
         }
 
         
     }
 
-    public void moving()
+    public void detected()
     {
         if(!animPlayer.IsPlaying())
             animPlayer.Play("run");
@@ -66,7 +70,21 @@ public class Enemy : KinematicBody
         Vector3 currPos = (player.Translation - Translation).Normalized();
         player.Rotation = new Vector3(player.Rotation.x, 0.0f, 0.0f);
         movePos = currPos;
-        MoveAndSlide(movePos * speed);
+        MoveAndSlide(movePos * speed * 1.5f);
+        if(this.Translation.DistanceTo(player.Translation) > 10.0f)
+            enemyState = ENEMY_STATE.MOVING;
+    }
+
+    public void moving()
+    {
+        if(!animPlayer.IsPlaying())
+            animPlayer.Play("run");
+        Vector3 currPos = new Vector3(1.0f, 0.0f, 0.0f);
+        if(this.IsOnWall())
+            movePos *= -1;
+        MoveAndSlide(movePos*speed);
+        if(this.Translation.DistanceTo(player.Translation) < 7.0f)
+            enemyState = ENEMY_STATE.DETECTED;
     }
 
     public void stun()
