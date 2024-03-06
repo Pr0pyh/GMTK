@@ -1,0 +1,9 @@
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/bin/ExportDebug/Gmtk 2023.dll
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/bin/ExportDebug/Gmtk 2023.pdb
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.csproj.AssemblyReference.cache
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.GeneratedMSBuildEditorConfig.editorconfig
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.AssemblyInfoInputs.cache
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.AssemblyInfo.cs
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.csproj.CoreCompileInputs.cache
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.dll
+/home/andrej/Desktop/GodotProjekti/GMTK/.mono/temp/obj/ExportDebug/Gmtk 2023.pdb
